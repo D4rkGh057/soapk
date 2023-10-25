@@ -1,20 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TextInput, Button, Pressable } from 'react-native';
+import axios from 'axios';
 
-export default function App() {
+const StudentForm = () => {
+  const [cedula, setCedula] = useState('');
+
+  const handleSaveStudent = () => {
+    axios.delete(`http://localhost/api.php/?var=${cedula}`)
+    .then(response => {
+      console.log(response.data); 
+    })
+    .catch(error => {
+      console.error(error);
+    });
+  };
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View>
+      <Text>Cédula:</Text>
+      <TextInput value={cedula} onChangeText={text => setCedula(text)} />
+
+      <Pressable title="Guardar Estudiante" onPress={handleSaveStudent}>
+        <Text>Guardar</Text>
+      </Pressable>
     </View>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default StudentForm;
