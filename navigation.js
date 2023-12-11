@@ -12,7 +12,7 @@ const Stack = createNativeStackNavigator();
 const Navigation = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Navigator>
         <Stack.Screen name="Listar" component={Listar} />
         <Stack.Screen name="Eliminar" component={Eliminar} />
         <Stack.Screen name="Guardar" component={Guardar} />
