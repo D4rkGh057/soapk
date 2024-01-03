@@ -1,10 +1,9 @@
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Alert, FlatList, Pressable, StyleSheet, Text, View,Modal } from "react-native";
-import { Button, TouchableOpacity } from "react-native-web";
+import { FlatList, Pressable, StyleSheet, Text, View, Modal } from "react-native";
+import { TouchableOpacity } from "react-native-web";
 import { useIsFocused } from '@react-navigation/native';
-
 
 const StudentList = () => {
   const navigation = useNavigation();
@@ -125,9 +124,6 @@ const StudentList = () => {
     );
   };
 
-  const kaboom = () => {
-    alert("Kboom?");
-  }
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Listado de Estudiantes</Text>
