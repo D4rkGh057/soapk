@@ -2,7 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { FlatList, Pressable, StyleSheet, Text, View, Modal } from "react-native";
-import { TouchableOpacity } from "react-native-web";
+import { TextInput, TouchableOpacity } from "react-native-web";
 import { useIsFocused } from '@react-navigation/native';
 
 const StudentList = () => {
@@ -18,6 +18,22 @@ const StudentList = () => {
     }
   }, [isFocused]);
 
+  const [cedula, setCedula] = useState('');
+
+  const buscarEstudiante = () => {
+    if (cedula == '') {
+      cargarEstudiantes();
+    } else {
+      axios.get(`http://localhost/quinto-andres/api.php?cedula=${cedula}`)
+        .then(response => {
+          setStudents(response.data);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    }
+  };
+
   const cargarEstudiantes = () => {
     axios
       .get("http://localhost/quinto-andres/api.php")
@@ -28,6 +44,7 @@ const StudentList = () => {
         console.error(error);
       });
   }
+
   const [expandedItem, setExpandedItem] = useState(null);
 
   const handlePress = (item) => {
@@ -126,6 +143,13 @@ const StudentList = () => {
 
   return (
     <View style={styles.container}>
+      <View style={{ marginLeft: "auto", flexDirection: "row", }}>
+        <TextInput style={styles.input} value={cedula} placeholder="Ingresa un número de cedula" onChangeText={text => setCedula(text)} />
+
+        <Pressable style={styles.button} onPress={buscarEstudiante}>
+          <Text style={{ color: "#f0f0f0" }}>Buscar</Text>
+        </Pressable>
+      </View>
       <Text style={styles.title}>Listado de Estudiantes</Text>
       <FlatList
         data={students}
@@ -215,6 +239,17 @@ const styles = StyleSheet.create({
     backgroundColor: 'red',
     padding: 10,
     borderRadius: 5,
+  }, input: {
+    height: 40,
+    width: 270,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+    borderRadius: 50,
+    borderColor: "#0C0C0C",
+    color: '#0C0C0C',
+    textAlign: 'center',
+    fontSize: 18,
   },
 });
 

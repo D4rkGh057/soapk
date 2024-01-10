@@ -5,8 +5,8 @@ import axios from 'axios';
 const StudentForm = () => {
   const [cedula, setCedula] = useState('');
 
-  const handleSaveStudent = () => {
-    axios.delete(`http://localhost/quinto/api.php/?var=${cedula}`)
+  const buscarEstudiante = () => {
+    axios.get(`http://localhost/quinto/api.php/?cedula=${cedula}`)
     .then(response => {
       console.log(response.data); 
     })
@@ -19,8 +19,8 @@ const StudentForm = () => {
       <Text style={styles.label}>Cédula:</Text>
       <TextInput style={styles.input} value={cedula} onChangeText={text => setCedula(text)} />
 
-      <Pressable style={styles.button} title="Guardar Estudiante" onPress={handleSaveStudent}>
-        <Text style={styles.buttonText}>Guardar</Text>
+      <Pressable style={styles.button} title="Guardar Estudiante" onPress={buscarEstudiante}>
+        <Text style={styles.buttonText}>Buscar</Text>
       </Pressable>
     </View>
   );
