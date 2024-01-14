@@ -13,7 +13,7 @@ const StudentForm = () => {
   const navigation = useNavigation();
 
   const handleSaveStudent = () => {
-    axios.post('http://localhost/quinto-andres/api.php', {
+    axios.post('https://servicios5sw-93edae59f7f3.herokuapp.com/api.php', {
       cedula: cedula,
       nombre: nombre,
       apellido: apellido,

@@ -23,7 +23,7 @@ export default function StudentForm({ route }) {
   const [telefono, setTelefono] = useState('');
 
   const handleSaveStudent = () => {
-    axios.put('http://localhost/quinto-andres/api.php', {
+    axios.put('https://servicios5sw-93edae59f7f3.herokuapp.com/api.php', {
       cedula: cedula,
       nombre: nombre,
       apellido: apellido,

@@ -1,8 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { FlatList, Pressable, StyleSheet, Text, View, Modal } from "react-native";
-import { TextInput, TouchableOpacity } from "react-native-web";
+import { TouchableOpacity,TextInput,FlatList, Pressable, StyleSheet, Text, View, Modal } from "react-native";
 import { useIsFocused } from '@react-navigation/native';
 
 const StudentList = () => {
@@ -24,7 +23,7 @@ const StudentList = () => {
     if (cedula == '') {
       cargarEstudiantes();
     } else {
-      axios.get(`http://localhost/quinto-andres/api.php?cedula=${cedula}`)
+      axios.get(`https://servicios5sw-93edae59f7f3.herokuapp.com/api.php?cedula=${cedula}`)
         .then(response => {
           setStudents(response.data);
         })
@@ -36,7 +35,7 @@ const StudentList = () => {
 
   const cargarEstudiantes = () => {
     axios
-      .get("http://localhost/quinto-andres/api.php")
+      .get("https://servicios5sw-93edae59f7f3.herokuapp.com/api.php")
       .then((response) => {
         setStudents(response.data);
       })
@@ -56,7 +55,7 @@ const StudentList = () => {
   };
 
   const eliminarEstudiante = (cedula) => {
-    axios.delete(`http://localhost/quinto-andres/api.php?var=${cedula}`)
+    axios.delete(`https://servicios5sw-93edae59f7f3.herokuapp.com/api.php?var=${cedula}`)
       .then(response => {
         cargarEstudiantes();
         console.log(response.data);
